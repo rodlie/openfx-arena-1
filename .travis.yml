@@ -37,7 +37,8 @@ before_install:
         $mingw64 pacman -Syu --noconfirm $arena_pkgs || $mingw64 pacman -Syu --noconfirm $arena_pkgs || $mingw64 pacman -Syu --noconfirm $arena_pkgs
         # taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
         export PATH=/C/msys64-20180531/mingw64/bin:$PATH
-        export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig
+        # export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig
+        export PKG_CONFIG_PATH=/c/msys64-20180531/mingw64/lib/pkgconfig:/c/msys64-20180531/mingw64/share/pkgconfig
         # export MAKE=mingw32-make  # so that Autotools can find it
       ;;
       linux)
