@@ -17,7 +17,8 @@ before_install:
       windows)
         choco uninstall -y mingw
         wget http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20180531.tar.xz
-        tar xvf msys2-base-x86_64-20180531.tar.xz
+        7z.exe -x msys2-base-x86_64-20180531.tar.xz
+        tar xvf msys2-base-x86_64-20180531.tar
         mv msys64 /c/msys64-20180531
         sed -i 's/SigLevel    = Required DatabaseOptional/SigLevel = Never/' /c/msys64-20180531/etc/pacman.conf
         echo "Server = https://downloads.sourceforge.net/project/openfx-arena/MINGW-packages/mingw64" > /c/msys64-20180531/etc/pacman.d/mirrorlist.mingw64
