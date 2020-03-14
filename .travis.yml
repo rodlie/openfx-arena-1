@@ -18,7 +18,7 @@ before_install:
         choco uninstall -y mingw
         wget http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20180531.tar.xz
         7z.exe x msys2-base-x86_64-20180531.tar.xz
-        tar xvf msys2-base-x86_64-20180531.tar
+        tar xf msys2-base-x86_64-20180531.tar
         mv msys64 /c/msys64-20180531
         sed -i 's/SigLevel    = Required DatabaseOptional/SigLevel = Never/' /c/msys64-20180531/etc/pacman.conf
         echo "Server = https://downloads.sourceforge.net/project/openfx-arena/MINGW-packages/mingw64" > /c/msys64-20180531/etc/pacman.d/mirrorlist.mingw64
@@ -29,7 +29,7 @@ before_install:
         export mingw64="$msys2 -mingw64 -full-path -here -c "\"\$@"\" --"
         export msys2+=" -msys2 -c "\"\$@"\" --"
         $msys2 pacman --sync --noconfirm
-        $msys2 pacman -Syu --noconfirm natron-sdk
+        $msys2 pacman -Syu --noconfirm natron-sdk || $msys2 pacman -Syu --noconfirm natron-sdk
         # taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
         export PATH=/C/msys64-20180531/mingw64/bin:$PATH
         export MAKE=mingw32-make  # so that Autotools can find it
