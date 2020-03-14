@@ -1,23 +1,14 @@
 #!/bin/bash
 # MSYS2 wrapper for Travis CI Windows
 
+# debug
 env
 uname -a
 ls /
-pwd
-ls /mingw64/lib/pkgconfig
+CWD=`pwd`
 
-pacman -Syu --noconfirm openfx-arena-sdk || pacman -Syu --noconfirm openfx-arena-sdk
+# make sure we got the proper packages installed, note that Travis may fail to download some packages
+pacman -Syu --noconfirm openfx-arena-sdk || pacman -Syu --noconfirm openfx-arena-sdk || pacman -Syu --noconfirm openfx-arena-sdk
 
-ls /mingw64/lib/pkgconfig
-
-#export MSYSTEM_CARCH=x86_64
-#export MSYSTEM_CHOST=x86_64-w64-mingw32
-#export MINGW_PACKAGE_PREFIX=mingw-w64-x86_64
-#export MSYSTEM_PREFIX=/mingw64
-#export MINGW_CHOST=x86_64-w64-mingw32
-#export MSYSTEM=MINGW64
-#export MINGW_PREFIX=/mingw64
-#export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig
-
+# do a regular makefile debug build
 make MINGW=1
