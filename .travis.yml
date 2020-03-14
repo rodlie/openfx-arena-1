@@ -1,3 +1,4 @@
+
 os:
   - linux
   - windows
@@ -12,7 +13,7 @@ compiler:
 
 before_install:
 - |-
-      case $TRAVIS_OS_NAME in
+    case $TRAVIS_OS_NAME in
       windows)
         choco uninstall -y mingw
         wget http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20180531.tar.xz
@@ -30,37 +31,30 @@ before_install:
         taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
         export PATH=/C/msys64-20180531/mingw64/bin:$PATH
         export MAKE=mingw32-make  # so that Autotools can find it
-        ;;
-      case $TRAVIS_OS_NAME in
+      ;;
       linux)
         env
         df
         date -u
         uname -a
         export J='-j3'
-        if [ ${TRAVIS_OS_NAME} = "linux" ]; then
-          echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- ;
-        fi
+        echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
         git submodule update --init --recursive
         sudo apt remove --purge imagemagick imagemagick-common
-        if [ ${TRAVIS_OS_NAME} = "linux" -a "$CC" = "gcc" ];
-        then
-            if [ "$BUILDDOC" = 1 ]; then
-                sudo apt-get install doxygen xsltproc;
-            fi;
-            sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
-            sudo apt-get update;
-            sudo apt-get install gcc-8 g++-8;
-            sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 90;
-            sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90;
+        if [ "$BUILDDOC" = 1 ]; then
+          sudo apt-get install doxygen xsltproc
         fi
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install gcc-8 g++-8
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 90
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90
         sudo add-apt-repository -y ppa:libreoffice/ppa
         sudo apt-get update
         sudo apt-get install -y cmake libsox-dev libfreetype6-dev libfontconfig1-dev libpango1.0-dev librsvg2-dev liblcms2-dev libzip-dev libcdr-dev libicu-dev libcppunit-dev libopencolorio-dev librevenge-dev libboost-all-dev gtk-doc-tools libharfbuzz-dev libselinux1-dev libcurl4-openssl-dev libidn11-dev librtmp-dev libgl-dev libfftw3-dev libmount-dev libnghttp2-dev libpsl-dev libopenjp2-7-dev
-        # libpoppler-glib-dev libpoppler-private-dev is too old (0.62)
-        ;;
+      ;;
     esac
-    
+
 install:
 - |-
     case $TRAVIS_OS_NAME in
@@ -93,7 +87,7 @@ install:
       make -j2
       sudo make install
       cd $CWD
-    ;;
+      ;;
     esac
 
 # Xenial has pango 1.38
