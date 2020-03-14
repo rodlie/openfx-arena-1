@@ -7,7 +7,7 @@ ls /
 pwd
 ls /mingw64/lib/pkgconfig
 
-pacman -Syu mingw-w64-x86_64-{cmake,cairo,pango,librsvg,libzip,poppler,imagemagick,lcms2,librevenge,libcdr,opencolorio-git,sox,libxml2,curl,fontconfig}
+pacman -Syu --noconfirm mingw-w64-x86_64-{cmake,cairo,pango,librsvg,libzip,poppler,imagemagick,lcms2,librevenge,libcdr,opencolorio-git,sox,libxml2,curl,fontconfig}
 
 ls /mingw64/lib/pkgconfig
 
